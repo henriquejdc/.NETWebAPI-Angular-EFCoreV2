@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="dashboard">ProEventos</a>
+    <button class="navbar-toggler" (click)="isCollapse = !isCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse"
+         [collapse]="isCollapse"
+         [isAnimated]="true"
+         id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="eventos">Eventos</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="palestrantes">Palestrantes</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="contatos">Contatos</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown" dropdown>
+            <a  dropdownToggle
+                class="nav-link dropdown-toggle"
+                style="cursor: pointer;"
+                id="navbarDropdownMenuLink"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="true"
+                aria-expanded="false"
+            >
+            Perfil
+          </a>
+          <ul *dropdownMenu="" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" routerLink="perfil" routerLinkActive="active">Perfil</a></li>
+            <li><a class="dropdown-item" href="#">Sair</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
