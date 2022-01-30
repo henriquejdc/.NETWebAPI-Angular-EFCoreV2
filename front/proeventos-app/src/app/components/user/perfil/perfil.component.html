@@ -2,7 +2,7 @@
 
 <div class="card rounded shadow-sm">
 
-  <form>
+  <form  [formGroup]="form">
     <div class="row p-3">
       <div class="col-lg-3 pt-1">
         <div class="card mb-3">
@@ -49,7 +49,9 @@
           </div>
           <div class="form-group col">
             <label>Título</label>
-            <select class="form-control">
+            <select class="form-control"
+                  [ngClass]="{'is-invalid': f.titulo.errors && f.titulo.touched }"
+                  formControlName="titulo">
               <option value=""></option>
               <option value="0">Não Quero</option>
               <option value="Senhorita">Tecnólogo(a)</option>
@@ -60,38 +62,76 @@
               <option value="Senhorita">Doutor(a)</option>
               <option value="Senhorita">Pós Doc</option>
             </select>
+            <div *ngIf="f.titulo.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
           </div>
           <div class="form-group col-sm-5">
             <label>Primeiro Nome</label>
-            <input type="text" class="form-control"/>
-
+            <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': f.primeiroNome.errors && f.primeiroNome.touched }"
+                  formControlName="primeiroNome"/>
+              <div *ngIf="f.primeiroNome.errors?.required" class="invalid-feedback">
+                Obrigatório
+              </div>
           </div>
           <div class="form-group col-sm-5">
             <label>Último nome</label>
-            <input type="text" class="form-control"/>
-
+            <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': f.ultimoNome.errors && f.ultimoNome.touched }"
+                  formControlName="ultimoNome"/>
+              <div *ngIf="f.ultimoNome.errors?.required" class="invalid-feedback">
+                Obrigatório
+              </div>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-sm-5">
             <label>E-mail</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': f.email.errors && f.email.touched }"
+                  formControlName="email" />
+            <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
+            <div *ngIf="f.email.errors?.email" class="invalid-feedback">
+              Formato de E-mail inválido.
+            </div>
           </div>
           <div class="form-group col-sm-4">
             <label>Telefone</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': f.telefone.errors && f.telefone.touched }"
+                  formControlName="telefone"
+                  placeholder="(000) 90000-0000" />
+            <div *ngIf="f.telefone.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
           </div>
           <div class="form-group col-sm">
             <label>Função</label>
-            <select class="form-control">
+            <select class="form-control"
+                  [ngClass]="{'is-invalid': f.funcao.errors && f.funcao.touched }"
+                  formControlName="funcao">
               <option value=""></option>
               <option value="Participante">Participante</option>
               <option value="Palestrante">Palestrante</option>
             </select>
+            <div *ngIf="f.funcao.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
           </div>
           <form-group class="col-12">
             <label>Descrição</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control"
+                  [ngClass]="{'is-invalid': f.descricao.errors && f.descricao.touched }"
+                  formControlName="descricao" />
+            <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
+            <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+              Máximo de 100 caracteres.
+            </div>
           </form-group>
         </div>
         <div>
@@ -101,18 +141,40 @@
         <div class="form-row">
           <div class="form-group col-sm">
             <label>Senha</label>
-            <input type="password" class="form-control" />
+            <input type="password" class="form-control"
+                  [ngClass]="{'is-invalid': f.senha.errors && f.senha.touched }"
+                  formControlName="senha" />
+            <div *ngIf="f.senha.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
+            <div *ngIf="f.senha.errors?.minlength" class="invalid-feedback">
+              Mínimo de 8 caracteres.
+            </div>
+            <div *ngIf="f.senha.errors?.mustMatch" class="invalid-feedback">
+              Senhas NÃO são IGUAIS!
+            </div>
           </div>
           <div class="form-group col-sm">
             <label>Confirmar Senha</label>
-            <input type="password" class="form-control" />
+            <input type="password" class="form-control"
+                  [ngClass]="{'is-invalid': f.confirmeSenha.errors && f.confirmeSenha.touched }"
+                  formControlName="confirmeSenha" />
+            <div *ngIf="f.confirmeSenha.errors?.required" class="invalid-feedback">
+              Obrigatório
+            </div>
+            <div *ngIf="f.confirmeSenha.errors?.minlength" class="invalid-feedback">
+              Mínimo de 8 caracteres.
+            </div>
+            <div *ngIf="f.confirmeSenha.errors?.mustMatch" class="invalid-feedback">
+              Senhas NÃO são IGUAIS!
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="d-flex">
-        <button class="btn btn-outline-secondary mr-auto border">
+        <button (click)="resetForm($event)" class="btn btn-outline-secondary mr-auto border">
           Cancelar Alteração
         </button>
         <button class="btn btn-success">
