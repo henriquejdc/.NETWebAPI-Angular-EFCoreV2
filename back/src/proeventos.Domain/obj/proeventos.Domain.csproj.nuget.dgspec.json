@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {}
+    "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {
+    "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
+        "projectUniqueName": "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
         "projectName": "proeventos.Domain",
-        "projectPath": "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
+        "projectPath": "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
         "packagesPath": "C:\\Users\\Henrique\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\obj\\",
+        "outputPath": "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Henrique\\AppData\\Roaming\\NuGet\\NuGet.Config",

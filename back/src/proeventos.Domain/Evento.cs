@@ -3,16 +3,20 @@ using System.Collections.Generic;
 
 namespace proeventos.Domain
 {
+    // [Table("Evento")]
     public class Evento
     {
+        // [Key]
         public int Id { get; set;}
         
+        // [Required]
         public string Local { get; set;}
 
         public DateTime? DataEvento { get; set;}
 
         public string Tema { get; set;}
 
+        // [NotMapped] caso nao seja um campo que sera usado
         public int QtdPessoas { get; set;}
 
         public string ImagemURL { get; set;}
