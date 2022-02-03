@@ -115,7 +115,7 @@ namespace proeventos.api.Controllers
                 if(evento == null) return NoContent();
 
                 if (await _eventoService.DeleteEventos(id))
-                    return Ok("Deletado");                
+                    return Ok(new {message = "Deletado"});                
                 else
                      return BadRequest($"Erro ao deletar atualizar.");
             }
