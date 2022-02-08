@@ -17,6 +17,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -32,6 +33,8 @@ export class EventoDetalheComponent implements OnInit {
   form : FormGroup = this.FormBuilder.group({});
   estadoSalvar = 'post';
   loteAtual = {id: 0, nome: '', indice: 0}
+  imagemURL = 'assets/cloud.png';
+  file: File;
 
   get modoEditar(): boolean {
     return this.estadoSalvar === 'put';
@@ -69,7 +72,7 @@ export class EventoDetalheComponent implements OnInit {
   constructor(private FormBuilder: FormBuilder,
               private localeService: BsLocaleService,
               private activatedRouter: ActivatedRoute,
-              private eventoServico: EventoService,
+              private eventoService: EventoService,
               private spinner: NgxSpinnerService,
               private toastr: ToastrService,
               private router: Router,
@@ -81,16 +84,18 @@ export class EventoDetalheComponent implements OnInit {
 
   public carregarEvento() : void {
     this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id');
+    this.estadoSalvar = 'post';
 
-
-    if (this.eventoId !== null || this.eventoId !== 0)
+    if (this.eventoId != null && this.eventoId != 0)
     {
       this.estadoSalvar = 'put';
       this.spinner.show();
-      this.eventoServico.getEventoById(this.eventoId).subscribe({
+      this.eventoService.getEventoById(this.eventoId).subscribe({
         next: (evento: Evento) => {
           this.evento = {...evento};
           this.form.patchValue(this.evento);
+          if (this.evento.imagemURL != '')
+            this.imagemURL = environment.api + 'resources/images/' + this.evento.imagemURL;
           this.carregarLotes();
           // this.evento.lotes.forEach(lote => {
           //   this.lotes.push(this.criarLote(lote))
@@ -122,7 +127,7 @@ export class EventoDetalheComponent implements OnInit {
           Validators.required,
           Validators.email
         ]],
-      imagemURL: ['', Validators.required],
+      imagemURL: [''],
       lotes: this.FormBuilder.array([])
     });
   }
@@ -160,7 +165,7 @@ export class EventoDetalheComponent implements OnInit {
         this.evento = {id: this.evento.id, ... this.form.value}
       }
 
-      this.eventoServico[this.estadoSalvar](this.evento).subscribe(
+      this.eventoService[this.estadoSalvar](this.evento).subscribe(
         (eventoRetorno: Evento) => {
           this.toastr.success('Evento salvo com sucesso.', 'Salvo!');
           this.router.navigate([`eventos/detalhe/${eventoRetorno.id}`]);
@@ -231,7 +236,7 @@ export class EventoDetalheComponent implements OnInit {
             this.lotes.removeAt(this.loteAtual.indice);
           },
           (error: any) => {
-            this.toastr.error(`Erro ao tentar deletar Lote ${this.loteAtual.id}`);
+            this.toastr.error(`Erro ao tentar deletar Lote ${this.loteAtual.id}`, 'Erro!');
             console.error(error);
           },
         ).add(() => this.spinner.hide());
@@ -244,6 +249,33 @@ export class EventoDetalheComponent implements OnInit {
   retornaTituloLote(nome: string): string {
     return nome === null || nome === '' ? 'Nome do Lote' : nome;
   }
+
+  onFileChange(ev: any): void {
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
+
+    this.file = ev.target.files;
+
+    reader.readAsDataURL(this.file[0]);
+
+    this.uploadImage();
+  }
+
+  uploadImage(): void {
+    this.spinner.show();
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe(
+      () => {
+        this.carregarEvento();
+        this.toastr.success('Imagem atualizada com sucesso.', 'Sucesso!');
+      },
+      (error: any) => {
+        this.toastr.error(`Erro ao atualizar imagem`, 'Erro!');
+        console.error(error);
+      },
+    ).add(() => this.spinner.hide());
+  }
+
 
   ngOnInit(): void {
     this.carregarEvento();

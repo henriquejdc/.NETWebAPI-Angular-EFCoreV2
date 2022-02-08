@@ -1,4 +1,3 @@
-
 .iconesSociais {
   color: rgb(94, 94, 94);
 }
@@ -21,4 +20,17 @@
   position: sticky;
   --default-height: 25px;
   top: var(--default-height);
+}
+
+.card-evento-view {
+  position: sticky;
+  top: 10px;
+}
+
+.card-img-block {
+  img {
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    width: 100%;
+  }
 }
