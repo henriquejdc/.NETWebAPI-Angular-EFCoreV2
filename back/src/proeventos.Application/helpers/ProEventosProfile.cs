@@ -1,6 +1,7 @@
 using AutoMapper;
 using proeventos.Application.Dtos;
 using proeventos.Domain;
+using proeventos.Domain.Identity;
 
 namespace proeventos.Application.helpers
 {
@@ -15,6 +16,12 @@ namespace proeventos.Application.helpers
             CreateMap<RedeSocial, RedeSocialDto>().ReverseMap();
 
             CreateMap<Palestrante, PalestranteDto>().ReverseMap();
+
+            CreateMap<User, UserDto>().ReverseMap();
+            
+            CreateMap<User, UserLoginDto>().ReverseMap();
+            
+            CreateMap<User, UserUpdateDto>().ReverseMap();
             
         }
     }

@@ -19,7 +19,6 @@ C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\pro
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\proeventos.api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\proeventos.api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\staticwebassets\proeventos.api.StaticWebAssets.Manifest.cache
-C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\staticwebassets\proeventos.api.StaticWebAssets.xml
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\scopedcss\bundle\proeventos.api.styles.css
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\proeventos.api.RazorTargetAssemblyInfo.cache
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\proeventos.api.csproj.CopyComplete
@@ -71,3 +70,16 @@ C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Mic
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Henrique\source\proeventos\back\src\proeventos.api\obj\Debug\net5.0\staticwebassets\proeventos.api.StaticWebAssets.xml

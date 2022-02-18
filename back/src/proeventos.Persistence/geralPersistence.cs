@@ -7,10 +7,10 @@ using proeventos.Persistence.Contratos;
 
 namespace proeventos.Persistence
 {
-    public class geralPersistence : IGeralPersistence
+    public class GeralPersistence : IGeralPersistence
     {
         private readonly proeventosContext _context;
-        public geralPersistence(proeventosContext context)
+        public GeralPersistence(proeventosContext context)
         {
             this._context = context;
 

@@ -7,10 +7,10 @@ using proeventos.Persistence.Contratos;
 
 namespace proeventos.Persistence
 {
-    public class lotePersistence : ILotePersistence
+    public class LotePersistence : ILotePersistence
     {
         private readonly proeventosContext _context;
-        public lotePersistence(proeventosContext context)
+        public LotePersistence(proeventosContext context)
         {
             this._context = context;
         }

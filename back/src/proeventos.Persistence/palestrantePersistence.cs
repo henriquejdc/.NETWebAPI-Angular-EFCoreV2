@@ -41,7 +41,8 @@ namespace proeventos.Persistence
                 .ThenInclude(pe => pe.Evento);
             }
 
-            query = query.OrderBy(p => p.Id).Where(p => p.Nome.ToLower()
+            query = query.OrderBy(p => p.Id).Where(p => p.User.PrimeiroNome.ToLower() 
+            .Contains(Nome.ToLower()) || p.User.UltimoNome.ToLower() 
             .Contains(Nome.ToLower()));;
 
             return await query.ToArrayAsync();

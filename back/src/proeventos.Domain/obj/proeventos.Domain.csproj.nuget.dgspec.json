@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {}
+    "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {
+    "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
         "projectName": "proeventos.Domain",
-        "projectPath": "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
+        "projectPath": "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\proeventos.Domain.csproj",
         "packagesPath": "C:\\Users\\Henrique\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Henrique\\source\\proeventos\\back\\src\\proeventos.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Henrique\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
