@@ -59,7 +59,12 @@ namespace proeventos.api.Controllers
 
                 if (user != null)
                 {
-                    return Ok(user);
+                    return Ok(
+                    new {
+                        UserName = user.UserName,
+                        PrimeiroNome = user.PrimeiroNome,
+                        Token = _tokenService.CreateToken(user).Result
+                    });
                 }
 
                 return BadRequest("Usuário não criado, tente mais tarde novamente!");

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace proeventos.api.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
