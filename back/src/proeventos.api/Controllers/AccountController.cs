@@ -12,7 +12,7 @@ using proeventos.Application.Dtos;
 
 namespace proeventos.api.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
@@ -108,18 +108,26 @@ namespace proeventos.api.Controllers
         public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto)
         {
             try
-            {
+            {   
+                if (userUpdateDto.UserName != User.GetUserName())
+                    return Unauthorized("Usuário inválido!");
+
                 var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
                 if (user == null) return Unauthorized("Usuário não encontrado!");
 
                 var userReturn = await _accountService.UpdateAccount(userUpdateDto);
 
-                if (userReturn != null)
+                if (userReturn == null)
                 {
                     return NoContent();
                 }
 
-                return Ok(userReturn);
+                return Ok(
+                    new {
+                        UserName = userReturn.UserName,
+                        PrimeiroNome = userReturn.PrimeiroNome,
+                        Token = _tokenService.CreateToken(userReturn).Result
+                    });
 
             }
             catch (Exception ex)
