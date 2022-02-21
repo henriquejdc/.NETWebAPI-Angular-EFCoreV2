@@ -2,6 +2,7 @@ using AutoMapper;
 using proeventos.Application.Dtos;
 using proeventos.Domain;
 using proeventos.Domain.Identity;
+using proeventos.Persistence.Models;
 
 namespace proeventos.Application.helpers
 {
