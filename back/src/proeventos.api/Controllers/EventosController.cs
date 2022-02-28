@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using proeventos.Domain;
-using proeventos.Application.Contratos;
 using Microsoft.AspNetCore.Http;
-using proeventos.Application.Dtos;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using System.Linq;
-using proeventos.api.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using proeventos.Application.Contratos;
+using proeventos.Application.Dtos;
+using proeventos.api.Extensions;
 using proeventos.Persistence.Models;
+using proeventos.api.helpers;
 
 namespace proeventos.api.Controllers
 {
@@ -19,16 +16,17 @@ namespace proeventos.api.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
+        private readonly string _destino = "Images";
         private readonly IEventoService _eventoService;
-        private readonly IWebHostEnvironment _hostEnveronment;
         private readonly IAccountService _accountService;
+        private readonly IUtil _util;
         public EventosController(IEventoService eventoService, 
-                                 IWebHostEnvironment hostEnveronment,
-                                 IAccountService accountService)
+                                 IAccountService accountService, 
+                                 IUtil util)
         {
             _eventoService = eventoService;
-            _hostEnveronment = hostEnveronment;
             _accountService = accountService;
+            _util = util;
         }
 
         [HttpGet]
@@ -82,8 +80,8 @@ namespace proeventos.api.Controllers
 
                 if (file.Length > 0)
                 {
-                    DeleteImage(evento.ImagemURL);
-                    evento.ImagemURL = await SaveImage(file);
+                    _util.DeleteImage(evento.ImagemURL, _destino);
+                    evento.ImagemURL = await _util.SaveImage(file, _destino);
                 }
                 var EventoRetorno = await _eventoService.UpdateEventos(User.GetUserId(), eventoId, evento);
 
@@ -93,7 +91,7 @@ namespace proeventos.api.Controllers
             catch (Exception ex)
             {                
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao inserir evento. Erro: {ex.Message}");
+                $"Erro ao inserir imagem do evento. Erro: {ex.Message}");
             }     
         }
 
@@ -142,7 +140,7 @@ namespace proeventos.api.Controllers
 
                 if (await _eventoService.DeleteEventos(User.GetUserId(), id)){
                     
-                    DeleteImage(evento.ImagemURL);
+                    _util.DeleteImage(evento.ImagemURL, _destino);
                     return Ok(new {message = "Deletado"});      
                 }          
                 else
@@ -155,37 +153,37 @@ namespace proeventos.api.Controllers
             }    
         }
 
-        [NonAction]
-        public async Task<string> SaveImage(IFormFile imageFile)
-        {
-            string imageName = new String(
-                Path.GetFileNameWithoutExtension(imageFile.FileName)
-                .Take(10)
-                .ToArray()).Replace(' ','-');
+        // [NonAction]
+        // public async Task<string> SaveImage(IFormFile imageFile)
+        // {
+        //     string imageName = new String(
+        //         Path.GetFileNameWithoutExtension(imageFile.FileName)
+        //         .Take(10)
+        //         .ToArray()).Replace(' ','-');
             
-            imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmssfff")}{Path.GetExtension(imageFile.FileName)}";
+        //     imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmssfff")}{Path.GetExtension(imageFile.FileName)}";
 
-            var imagePath = Path.Combine(_hostEnveronment.ContentRootPath, 
-            @"Resources/images", imageName);
+        //     var imagePath = Path.Combine(_hostEnveronment.ContentRootPath, 
+        //     @"Resources/images", imageName);
 
-            using(var fileStream = new FileStream(imagePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
+        //     using(var fileStream = new FileStream(imagePath, FileMode.Create))
+        //     {
+        //         await imageFile.CopyToAsync(fileStream);
+        //     }
 
-            Console.WriteLine(imageName);
-            return imageName;
-        }
+        //     Console.WriteLine(imageName);
+        //     return imageName;
+        // }
 
-        [NonAction]
-        public void DeleteImage(string imageName)
-        {
-            var imagePath = Path.Combine(_hostEnveronment.ContentRootPath, 
-            @"Resources/images", imageName);
-            if (System.IO.File.Exists(imagePath)){
-                System.IO.File.Delete(imagePath);
-            }
-        }
+        // [NonAction]
+        // public void DeleteImage(string imageName)
+        // {
+        //     var imagePath = Path.Combine(_hostEnveronment.ContentRootPath, 
+        //     @"Resources/images", imageName);
+        //     if (System.IO.File.Exists(imagePath)){
+        //         System.IO.File.Delete(imagePath);
+        //     }
+        // }
 
 
     }

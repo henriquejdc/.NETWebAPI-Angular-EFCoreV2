@@ -18,6 +18,10 @@ namespace proeventos.Application.helpers
 
             CreateMap<Palestrante, PalestranteDto>().ReverseMap();
 
+            CreateMap<Palestrante, PalestranteAddDto>().ReverseMap();
+            
+            CreateMap<Palestrante, PalestranteUpdateDto>().ReverseMap();
+
             CreateMap<User, UserDto>().ReverseMap();
             
             CreateMap<User, UserLoginDto>().ReverseMap();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using proeventos.api.Extensions;
+using proeventos.api.helpers;
 using proeventos.Application.Contratos;
 using proeventos.Application.Dtos;
 
@@ -17,13 +18,17 @@ namespace proeventos.api.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
+        private readonly string _destino = "Perfil";
         private readonly IAccountService _accountService;
         private readonly ITokenService _tokenService;
+        private readonly IUtil _util;
         public AccountController(IAccountService accountService,
-                                 ITokenService tokenService)
+                                 ITokenService tokenService,
+                                 IUtil util)
         {
             _tokenService = tokenService;
             _accountService = accountService;
+            _util = util;
 
         }
 
@@ -135,6 +140,35 @@ namespace proeventos.api.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
                 $"Erro ao atualizar usuário. Erro: {ex.Message}");
             }    
+        }
+
+
+        [HttpPost("upload-image")]
+        public async Task<IActionResult> UploadImage()
+        {
+            try
+            {
+                var account = await _accountService.GetUserByUserNameAsync(User.GetUserName());
+
+                if (account == null) return NoContent();
+
+                var file = Request.Form.Files[0];
+
+                if (file.Length > 0)
+                {
+                    _util.DeleteImage(account.ImagemURL, _destino);
+                    account.ImagemURL = await _util.SaveImage(file, _destino);
+                }
+                var AccountRetorno = await _accountService.UpdateAccount(account);
+
+                ;
+                return Ok(AccountRetorno);
+            }
+            catch (Exception ex)
+            {                
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                $"Erro ao inserir imagem do usuário. Erro: {ex.Message}");
+            }     
         }
     }
 }
