@@ -101,20 +101,20 @@ namespace proeventos.Application
                     {
                         await AddRedeSocial(palestranteId, model, false);
                     }
-                    else
-                    {   
-                        var redeSocial = redeSociais.FirstOrDefault(redeSocial => redeSocial.Id == model.Id);
-
+                    else                    
+                    {
+                        var RedeSocial = redeSociais.FirstOrDefault(RedeSocial => RedeSocial.Id == model.Id);
                         model.PalestranteId = palestranteId;
 
-                        _mapper.Map(model, redeSocial);
+                        _mapper.Map(model, RedeSocial);
 
-                        _redeSocialPersistence.Update<RedeSocial>(redeSocial);
+                        _redeSocialPersistence.Update<RedeSocial>(RedeSocial);
 
                         await _redeSocialPersistence.SaveChangesAsync();
                     }
 
                 }
+
 
                 var redeSocialRetorno = await _redeSocialPersistence.GetAllByPalestranteIdAsync(palestranteId);
                     

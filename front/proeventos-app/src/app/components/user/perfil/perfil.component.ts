@@ -1,97 +1,66 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ValidatorField } from '@app/helpers/ValidatorField';
-import { AccountService } from '@app/services/account.service';
-import { UserUpdate } from '@app/models/identity/UserUpdate';
-import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UserUpdate } from '@app/models/identity/UserUpdate';
+import { AccountService } from '@app/services/account.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  styleUrls: ['./perfil.component.scss'],
 })
-
 export class PerfilComponent implements OnInit {
+  public usuario = {} as UserUpdate;
+  public file: File;
+  public imagemURL = '';
 
-  userUpdate = {} as UserUpdate;
-  form : FormGroup = this.FormBuilder.group({});
+  public get ehPalestrante(): boolean {
+    return this.usuario.funcao === 'Palestrante';
+  }
 
   constructor(
-              public FormBuilder: FormBuilder,
-              public accountService: AccountService,
-              private router: Router,
-              private toastr: ToastrService,
-              private spinner: NgxSpinnerService) { }
-
-  get f(): any{
-    return this.form.controls;
-  }
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+    private accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
-    this.validation();
-    this.carregarUsuario();
+
   }
 
-  private carregarUsuario(): void {
+  public setFormValue(usuario: UserUpdate): void {
+    this.usuario = usuario;
+    if (this.usuario.imagemURL)
+      this.imagemURL = environment.api + `Resources/Perfil/${this.usuario.imagemURL}`;
+    else
+      this.imagemURL = './assets/img/perfil.png';
+
+  }
+
+  onFileChange(ev: any): void {
+    const reader = new FileReader();
+
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
+
+    this.file = ev.target.files;
+    reader.readAsDataURL(this.file[0]);
+
+    this.uploadImagem();
+  }
+
+  private uploadImagem(): void {
     this.spinner.show();
-    this.accountService.getUser().subscribe(
-      (userRetorno: UserUpdate) =>
-      {
-        this.userUpdate = userRetorno;
-        this.form.patchValue(this.userUpdate);
-        this.toastr.success('Usuário Carregado', 'Sucesso');
-      },
-      (error) =>
-      {
-        this.toastr.error(error, 'Erro');
-        this.router.navigate(['/dashboard']);
-      },
-    ).add(() => this.spinner.hide());
+    this.accountService
+      .postUpload(this.file)
+      .subscribe(
+        () => this.toastr.success('Imagem atualizada com Sucesso', 'Sucesso!'),
+        (error: any) => {
+          this.toastr.error('Erro ao fazer upload de imagem','Erro!');
+          console.error(error);
+        }
+      ).add(() => this.spinner.hide());
   }
 
-  private validation(): void {
-
-    const formOptions: AbstractControlOptions = {
-      validators: ValidatorField.MustMatch('password', 'confirmePassword')
-    }
-
-    this.form = this.FormBuilder.group({
-      userName: [''],
-      titulo:['NaoInformado', [Validators.required]],
-      primeiroNome:['', [Validators.required]],
-      ultimoNome:['', [Validators.required]],
-      email:['', [Validators.required, Validators.email]],
-      phoneNumber:['', [Validators.required]],
-      funcao:['NaoInformado', [Validators.required]],
-      descricao:['', [Validators.required, Validators.maxLength(100)]],
-      password:['', [Validators.required, Validators.minLength(6)]],
-      confirmePassword:['', [Validators.required, Validators.minLength(6)]],
-    }, formOptions)
-  }
-
-  public resetForm(event: any): void {
-    event.preventDefault();
-    this.form.reset();
-  }
-
-  public onSubmit(): void {
-    if (this.form.invalid){
-      this.atualizarUsuario();
-    }
-  }
-
-  public atualizarUsuario() {
-    this.userUpdate = { ... this.form.value }
-    this.spinner.show();
-    this.accountService.updateUser(this.userUpdate).subscribe(
-      () => { this.toastr.success('Usuário atualizado!', 'Sucesso') },
-      (error) => {
-        console.log(error);
-        this.toastr.error(error.error, 'Erro')
-      }
-    ).add(() => this.spinner.hide());
-  }
 
 }
