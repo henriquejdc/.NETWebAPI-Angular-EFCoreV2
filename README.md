@@ -1,27 +1,30 @@
 # ProEventos - Curso da Udemy
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
+# Seja Full-Stack com .NET Web API e Angular + EF Core - V2.0 - [Course](http://www.udemy.com/course/angular-dotnetcore-efcore/?referralCode=F44264DF39DEEE45EC50).
 
-## Development server
+The Summary is:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+01. Introdução ao Curso
+02. NET Core 5
+03. EF Core 5 - Introdução
+04. Angular - Introdução
+05. Angular - Interpolação, Diretivas e Binding
+06. .NET 5 - Múltiplas Camadas
+07. Angular - Organizar, Rota, Alertas e Mais
+08. Angular - Reactive Forms e Novo Layout
+09. DTOs & Data Annotations
+10. Angular - Registrando Evento
+11. Angular e .NET - Eventos e Lotes
+12. Upload de Imagens
+13. Asp .NET Core Identity - Autenticar e Autorizar - (TOKEN - JWT)
+14. Angular + .NET Core Identity + JWT
+15. Paginação e Filtros
+16. Palestrantes e Redes Sociais - Backend
+17. Palestrantes e Redes Sociais - Frontend
+18. Palestrantes e Eventos (2022)
+19. Docker + MySQL (2022)  
 
-## Code scaffolding
+## Basic Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. [Install Node.js](https://nodejs.org/)
+2. [Install .NET Core 5](https://dotnet.microsoft.com/download/)
